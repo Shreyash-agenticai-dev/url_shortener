@@ -106,6 +106,11 @@ class ShortURLInfoView(APIView):
     def get(self, request, short_id):
         try:
             url = ShortURL.objects.get(short_id=short_id)
+            
+            if url.password:
+                if request.GET.get('password') != url.password:
+                    return HttpResponseForbidden("Password required or incorrect.")
+                
             return Response({
                 'original_url': url.original_url,
                 'created_at':   url.created_at,
