@@ -4,7 +4,12 @@ from django.core.exceptions import ValidationError
 import requests
 
 class ShortenURLSerializer(serializers.Serializer):
-    url = serializers.CharField()
+    url = serializers.URLField()
+    custom_id = serializers.CharField(required=False, allow_blank=True)
+    expires_in = serializers.IntegerField(required=False)  # seconds
+    password = serializers.CharField(required=False, allow_blank=True)
+    one_time = serializers.BooleanField(required=False, default=False)
+
     
     def validate_url(self, value):
         

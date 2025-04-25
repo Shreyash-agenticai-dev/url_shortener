@@ -3,3 +3,7 @@ djangorestframework
 mongoengine
 shortuuid
 requests
+user_agents
+datetime
+
+
